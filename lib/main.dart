@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:multivendor/views/landing_customer_screen.dart';
+import 'package:multivendor/views/auth/landing_customer_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: "Bold",
       ),
       home: LandingCustomerScreen(),
     );
