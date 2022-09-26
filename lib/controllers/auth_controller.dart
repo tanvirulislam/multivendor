@@ -52,12 +52,18 @@ class AuthController {
         await _firestore.collection('users').doc(credential.user!.uid).set({
           'fullName': fullName,
           'email': email,
-          'Image': downloadUrl,
+          'image': downloadUrl,
         });
         res = 'success';
         print('Account created');
       } else {
         res = 'Field must not be empty';
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        res = e.toString();
+      } else if (e.code == 'email-already-in-use') {
+        res = e.toString();
       }
     } catch (e) {
       res = e.toString();
@@ -69,17 +75,19 @@ class AuthController {
     String res = 'Something is Wrong';
     try {
       if (email.isNotEmpty && password.isNotEmpty) {
-        _auth.signInWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
         res = 'success';
         print('Login successfull');
       } else {
         res = 'Field must not be empty';
       }
-    } catch (e) {
-      res = e.toString();
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        res = 'user-not-found';
+      } else if (e.code == 'wrong-password') {
+        res = 'wrong-password';
+      }
     }
     return res;
   }

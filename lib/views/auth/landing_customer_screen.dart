@@ -107,7 +107,9 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                             )
                           : CircleAvatar(
                               radius: 60,
-                              backgroundColor: Colors.cyan,
+                              backgroundImage: NetworkImage(
+                                'https://www.pngitem.com/pimgs/m/87-877270_logo-icon-profile-png-transparent-png.png',
+                              ),
                             ),
                       SizedBox(width: 10),
                       Column(
@@ -242,7 +244,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Create seller account'),
+                      Text("Create Seller's Account"),
                       TextButton(
                           onPressed: () {
                             Navigator.push(

@@ -6,7 +6,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:multivendor/views/auth/landing_customer_screen.dart';
-import 'package:multivendor/views/auth/landing_seller_screen.dart';
 import 'package:multivendor/views/customer_home_screen.dart';
 
 void main() async {
@@ -28,7 +27,7 @@ class _MyAppState extends State<MyApp> {
   voidCheckLogin() async {
     var qn = await FirebaseFirestore.instance
         .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(FirebaseAuth.instance.currentUser?.uid)
         .get();
     if (qn.exists) {
       setState(() {

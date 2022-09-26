@@ -53,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
                                   backgroundColor:
                                       Theme.of(context).scaffoldBackgroundColor,
                                   radius: 50,
-                                  backgroundImage: NetworkImage(data['Image']),
+                                  backgroundImage: NetworkImage(data['image']),
                                 ),
                                 SizedBox(
                                   width: 8,
