@@ -26,7 +26,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         body: Stack(
           children: [
             Positioned(
-              bottom: 0,
+              top: 0,
               left: 0,
               child: SizedBox(
                 width: screenSize.width * .2,
@@ -61,7 +61,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ),
             ),
             Positioned(
-              bottom: 0,
+              top: 0,
               right: 0,
               child: Container(
                 width: screenSize.width * .8,

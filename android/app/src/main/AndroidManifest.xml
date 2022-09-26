@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.multivendor">
    <application
-        android:label="MultiVendor"
+        android:label="Multi Vendor"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

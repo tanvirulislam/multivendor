@@ -37,47 +37,86 @@ class MenCategoryScreen extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          height: screenSize.height * .6,
-          // color: Colors.amber,
-          child: GridView.count(
-            crossAxisCount: screenSize.width > 400 ? 4 : 3,
-            // crossAxisSpacing: 15,
-            mainAxisSpacing: 25,
-            children: List.generate(
-              menCategoryTitle.length,
-              (index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SubcategoryScreen(
-                                subcategoryName: menCategoryTitle[index],
-                                categoryName: 'Men',
-                              ),
-                            )),
-                        child: SizedBox(
-                          child: Image.network(
-                            menCategoryImage[index],
-                            fit: BoxFit.cover,
-                            height: 65,
-                            width: double.infinity,
-                          ),
+        Expanded(
+          child: GridView.builder(
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: screenSize.width > 400 ? 4 : 2,
+            ),
+            itemCount: menCategoryTitle.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Card(
+                elevation: 2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SubcategoryScreen(
+                              subcategoryName: menCategoryTitle[index],
+                              categoryName: 'Men',
+                            ),
+                          )),
+                      child: SizedBox(
+                        child: Image.network(
+                          menCategoryImage[index],
+                          fit: BoxFit.cover,
+                          height: screenSize.width > 400 ? 120 : 110,
+                          width: double.infinity,
                         ),
                       ),
-                      Text(menCategoryTitle[index]),
-                    ],
-                  ),
-                );
-              },
-            ),
+                    ),
+                    Text(menCategoryTitle[index]),
+                    SizedBox(height: 3),
+                  ],
+                ),
+              );
+            },
           ),
-        )
+        ),
+        // Expanded(
+        //   child: GridView.count(
+        //     crossAxisCount: screenSize.width > 400 ? 4 : 3,
+        //     // crossAxisSpacing: 15,
+        //     mainAxisSpacing: 25,
+        //     children: List.generate(
+        //       menCategoryTitle.length,
+        //       (index) {
+        //         return Padding(
+        //           padding: const EdgeInsets.all(8.0),
+        //           child: Card(
+        //             elevation: 3,
+        //             child: Column(
+        //               children: [
+        //                 InkWell(
+        //                   onTap: () => Navigator.push(
+        //                       context,
+        //                       MaterialPageRoute(
+        //                         builder: (context) => SubcategoryScreen(
+        //                           subcategoryName: menCategoryTitle[index],
+        //                           categoryName: 'Men',
+        //                         ),
+        //                       )),
+        //                   child: SizedBox(
+        //                     child: Image.network(
+        //                       menCategoryImage[index],
+        //                       fit: BoxFit.cover,
+        //                       height: 58,
+        //                       width: double.infinity,
+        //                     ),
+        //                   ),
+        //                 ),
+        //                 Text(menCategoryTitle[index]),
+        //               ],
+        //             ),
+        //           ),
+        //         );
+        //       },
+        //     ),
+        //   ),
+        // )
       ],
     );
   }
