@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:multivendor/controllers/auth_controller.dart';
 import 'package:multivendor/controllers/snackbar_controller.dart';
@@ -33,11 +31,13 @@ class CustomerLoginScreenState extends State<CustomerLoginScreen> {
     if (res != 'success') {
       return snackBar(res, context);
     } else {
-      return Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => CustomerHomeScreen(),
-          ));
+      return Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CustomerHomeScreen(),
+        ),
+        (Route<dynamic> route) => false,
+      );
     }
   }
 

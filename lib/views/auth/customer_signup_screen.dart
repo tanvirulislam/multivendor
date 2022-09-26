@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multivendor/controllers/auth_controller.dart';
 import 'package:multivendor/controllers/snackbar_controller.dart';
-import 'package:multivendor/views/auth/Customer_login_screen.dart';
+import 'package:multivendor/views/auth/customer_login_screen.dart';
 import 'package:multivendor/views/customer_home_screen.dart';
 
 class LandingCustomerScreen extends StatefulWidget {
+  // static String routeName = 'LandingCustomerScreen';
   LandingCustomerScreen({Key? key}) : super(key: key);
 
   @override
@@ -40,7 +41,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
     if (res != 'success') {
       return snackBar(res, context);
     } else {
-      Navigator.push(
+      return Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => CustomerHomeScreen(),
