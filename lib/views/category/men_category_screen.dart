@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:multivendor/utilits/category_list.dart';
 import 'package:multivendor/views/minor_screen/subcategory_screen.dart';
 
 class MenCategoryScreen extends StatelessWidget {
-  List<String> menCategoryTitle = [
-    'Shirt',
-    'T-Shirt',
-    'Jacket',
-    'Suit',
-    'Jeans',
-    'Coat',
-    'Vest',
-    'Short',
-  ];
   List<String> menCategoryImage = [
     'https://images.unsplash.com/photo-1603252109303-2751441dd157?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c2hpcnR8ZW58MHx8MHx8&w=1000&q=80',
     'https://images.unsplash.com/photo-1627225924765-552d49cf47ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHQlMjBzaGlydHxlbnwwfHwwfHw%3D&w=1000&q=80',
@@ -54,7 +45,7 @@ class MenCategoryScreen extends StatelessWidget {
             // crossAxisSpacing: 15,
             mainAxisSpacing: 25,
             children: List.generate(
-              8,
+              menCategoryTitle.length,
               (index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),

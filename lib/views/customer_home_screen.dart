@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:multivendor/views/cart_screen.dart';
 import 'package:multivendor/views/category_screen.dart';
 import 'package:multivendor/views/home_screen.dart';
-import 'package:multivendor/views/inner_screen/search_screen.dart';
 import 'package:multivendor/views/profile_screen.dart';
 
 class CustomerHomeScreen extends StatefulWidget {
-  // static String routeName = 'CustomerHomeScreen';
+  static String routeName = 'CustomerHomeScreen';
   const CustomerHomeScreen({Key? key}) : super(key: key);
 
   @override

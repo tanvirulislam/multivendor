@@ -1,29 +1,39 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:multivendor/controllers/auth_controller.dart';
 import 'package:multivendor/controllers/snackbar_controller.dart';
+import 'package:multivendor/views/auth/customer_login_screen.dart';
 import 'package:multivendor/views/customer_home_screen.dart';
 
-class CustomerLoginScreen extends StatefulWidget {
-  CustomerLoginScreen({Key? key}) : super(key: key);
+class LandingSellerScreen extends StatefulWidget {
+  // static String routeName = 'LandingSellerScreen';
+  LandingSellerScreen({Key? key}) : super(key: key);
 
   @override
-  State<CustomerLoginScreen> createState() => CustomerLoginScreenState();
+  State<LandingSellerScreen> createState() => _LandingSellerScreenState();
 }
 
-class CustomerLoginScreenState extends State<CustomerLoginScreen> {
+class _LandingSellerScreenState extends State<LandingSellerScreen> {
   bool passwordVisible = true;
   final AuthController _authController = AuthController();
+  final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   bool isLoading = false;
-  login() async {
+  signUp() async {
     setState(() {
       isLoading = true;
     });
-    String res = await _authController.loginUsers(
+    String res = await _authController.signUpUsers(
+      fullName: _fullNameController.text,
       email: _emailController.text,
       password: _passwordController.text,
+      image: _Image,
     );
     setState(() {
       isLoading = false;
@@ -31,14 +41,27 @@ class CustomerLoginScreenState extends State<CustomerLoginScreen> {
     if (res != 'success') {
       return snackBar(res, context);
     } else {
-      return Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => CustomerHomeScreen(),
-        ),
-        (route) => false,
-      );
+      return Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CustomerHomeScreen(),
+          ));
     }
+  }
+
+  Uint8List? _Image;
+  pickImageFromGallery() async {
+    Uint8List im = await _authController.pickImage(ImageSource.gallery);
+    setState(() {
+      _Image = im;
+    });
+  }
+
+  pickImageFromCamera() async {
+    Uint8List im = await _authController.pickImage(ImageSource.camera);
+    setState(() {
+      _Image = im;
+    });
   }
 
   @override
@@ -56,7 +79,7 @@ class CustomerLoginScreenState extends State<CustomerLoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Sign in to customer's account",
+                        'Create customer account',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -72,6 +95,71 @@ class CustomerLoginScreenState extends State<CustomerLoginScreen> {
                         ),
                       )
                     ],
+                  ),
+                  Row(
+                    children: [
+                      _Image != null
+                          ? CircleAvatar(
+                              radius: 60,
+                              backgroundColor: Colors.cyan,
+                              backgroundImage: MemoryImage(_Image!),
+                            )
+                          : CircleAvatar(
+                              radius: 60,
+                              backgroundColor: Colors.cyan,
+                            ),
+                      SizedBox(width: 10),
+                      Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.cyan,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                              ),
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                pickImageFromCamera();
+                              },
+                              icon: Icon(
+                                Icons.camera_alt,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.cyan,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(15),
+                                bottomRight: Radius.circular(15),
+                              ),
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                pickImageFromGallery();
+                              },
+                              icon: Icon(
+                                Icons.photo,
+                              ),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  TextField(
+                    controller: _fullNameController,
+                    decoration: InputDecoration(
+                      labelText: 'Full name',
+                      hintText: 'Enter your name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
                   ),
                   SizedBox(height: 8),
                   TextField(
@@ -109,7 +197,7 @@ class CustomerLoginScreenState extends State<CustomerLoginScreen> {
                   SizedBox(height: 8),
                   InkWell(
                     onTap: () {
-                      login();
+                      signUp();
                     },
                     child: Container(
                       height: 55,
@@ -124,7 +212,7 @@ class CustomerLoginScreenState extends State<CustomerLoginScreen> {
                                 color: Colors.white,
                               )
                             : Text(
-                                'Login',
+                                'Sign up',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -136,12 +224,17 @@ class CustomerLoginScreenState extends State<CustomerLoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Don't have an accont?"),
+                      Text('Already have an accont?'),
                       TextButton(
                           onPressed: () {
-                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CustomerLoginScreen(),
+                              ),
+                            );
                           },
-                          child: Text('Sign up'))
+                          child: Text('Log in'))
                     ],
                   ),
                   Text('OR', textScaleFactor: 1.2),

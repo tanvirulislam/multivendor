@@ -50,6 +50,8 @@ class ProfileScreen extends StatelessWidget {
                             child: Row(
                               children: [
                                 CircleAvatar(
+                                  backgroundColor:
+                                      Theme.of(context).scaffoldBackgroundColor,
                                   radius: 50,
                                   backgroundImage: NetworkImage(data['Image']),
                                 ),

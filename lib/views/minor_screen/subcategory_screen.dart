@@ -14,7 +14,9 @@ class SubcategoryScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(subcategoryName),
+          elevation: 0,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          title: Text(subcategoryName, textScaleFactor: 1.3),
           centerTitle: true,
         ),
         body: Center(
