@@ -9,45 +9,19 @@ import 'package:multivendor/controllers/snackbar_controller.dart';
 import 'package:multivendor/views/auth/customer_login_screen.dart';
 import 'package:multivendor/views/customer_home_screen.dart';
 
-class LandingCustomerScreen extends StatefulWidget {
-  // static String routeName = 'LandingCustomerScreen';
-  LandingCustomerScreen({Key? key}) : super(key: key);
+class LandingSellerScreen extends StatefulWidget {
+  // static String routeName = 'LandingSellerScreen';
+  LandingSellerScreen({Key? key}) : super(key: key);
 
   @override
-  State<LandingCustomerScreen> createState() => _LandingCustomerScreenState();
+  State<LandingSellerScreen> createState() => _LandingSellerScreenState();
 }
 
-class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
+class _LandingSellerScreenState extends State<LandingSellerScreen> {
   bool passwordVisible = true;
   final AuthController _authController = AuthController();
-  final TextEditingController _fullNameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
   bool isLoading = false;
-  signUp() async {
-    setState(() {
-      isLoading = true;
-    });
-    String res = await _authController.signUpUsers(
-      fullName: _fullNameController.text,
-      email: _emailController.text,
-      password: _passwordController.text,
-      image: _Image,
-    );
-    setState(() {
-      isLoading = false;
-    });
-    if (res != 'success') {
-      return snackBar(res, context);
-    } else {
-      return Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => CustomerHomeScreen(),
-          ));
-    }
-  }
 
   Uint8List? _Image;
   pickImageFromGallery() async {
@@ -79,7 +53,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Create customer account',
+                        'Create A Seller Account',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -152,7 +126,6 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                   ),
                   SizedBox(height: 10),
                   TextField(
-                    controller: _fullNameController,
                     decoration: InputDecoration(
                       labelText: 'Full name',
                       hintText: 'Enter your name',
@@ -163,7 +136,6 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                   ),
                   SizedBox(height: 8),
                   TextField(
-                    controller: _emailController,
                     decoration: InputDecoration(
                       labelText: 'Email',
                       hintText: 'Enter your email',
@@ -174,7 +146,6 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                   ),
                   SizedBox(height: 8),
                   TextField(
-                    controller: _passwordController,
                     obscureText: passwordVisible,
                     decoration: InputDecoration(
                       labelText: 'Password',
@@ -196,9 +167,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                   ),
                   SizedBox(height: 8),
                   InkWell(
-                    onTap: () {
-                      signUp();
-                    },
+                    onTap: () {},
                     child: Container(
                       height: 55,
                       width: MediaQuery.of(context).size.width - 48,

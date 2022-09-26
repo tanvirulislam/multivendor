@@ -13,7 +13,10 @@ class CartScreen extends StatelessWidget {
           title: Text('Cart', textScaleFactor: 1.3),
           centerTitle: true,
           actions: [
-            Icon(Icons.delete_forever),
+            IconButton(
+              icon: Icon(Icons.delete_forever),
+              onPressed: () {},
+            ),
             SizedBox(width: 10),
           ],
         ),

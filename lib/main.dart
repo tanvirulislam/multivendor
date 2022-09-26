@@ -5,7 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:multivendor/views/auth/customer_signup_screen.dart';
+import 'package:multivendor/views/auth/landing_customer_screen.dart';
+import 'package:multivendor/views/auth/landing_seller_screen.dart';
 import 'package:multivendor/views/customer_home_screen.dart';
 
 void main() async {
@@ -23,6 +24,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Widget currentPage = LandingCustomerScreen();
+
   voidCheckLogin() async {
     var qn = await FirebaseFirestore.instance
         .collection('users')
@@ -57,9 +59,9 @@ class _MyAppState extends State<MyApp> {
       ),
       themeMode: ThemeMode.system,
       darkTheme: ThemeData.dark(),
-      home: currentPage,
+      // home: currentPage,
       // home: CustomerHomeScreen(),
-      // home: HomeScreen(),
+      home: LandingCustomerScreen(),
       // initialRoute: LandingCustomerScreen.routeName,
       // routes: {
       //   CustomerHomeScreen.routeName: (context) => CustomerHomeScreen(),

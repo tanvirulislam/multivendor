@@ -7,17 +7,18 @@ import 'package:image_picker/image_picker.dart';
 import 'package:multivendor/controllers/auth_controller.dart';
 import 'package:multivendor/controllers/snackbar_controller.dart';
 import 'package:multivendor/views/auth/customer_login_screen.dart';
+import 'package:multivendor/views/auth/landing_seller_screen.dart';
 import 'package:multivendor/views/customer_home_screen.dart';
 
-class LandingSellerScreen extends StatefulWidget {
-  // static String routeName = 'LandingSellerScreen';
-  LandingSellerScreen({Key? key}) : super(key: key);
+class LandingCustomerScreen extends StatefulWidget {
+  // static String routeName = 'LandingCustomerScreen';
+  LandingCustomerScreen({Key? key}) : super(key: key);
 
   @override
-  State<LandingSellerScreen> createState() => _LandingSellerScreenState();
+  State<LandingCustomerScreen> createState() => _LandingCustomerScreenState();
 }
 
-class _LandingSellerScreenState extends State<LandingSellerScreen> {
+class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
   bool passwordVisible = true;
   final AuthController _authController = AuthController();
   final TextEditingController _fullNameController = TextEditingController();
@@ -79,7 +80,7 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Create customer account',
+                        'Create A Customer Account',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -242,7 +243,16 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Create seller account'),
-                      TextButton(onPressed: () {}, child: Text('Sign up'))
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LandingSellerScreen(),
+                              ),
+                            );
+                          },
+                          child: Text('Sign up'))
                     ],
                   ),
                 ],
