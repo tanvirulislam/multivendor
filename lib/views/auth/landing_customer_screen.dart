@@ -42,11 +42,13 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
     if (res != 'success') {
       return snackBar(res, context);
     } else {
-      return Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => CustomerHomeScreen(),
-          ));
+      return Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CustomerHomeScreen(),
+        ),
+        (route) => false,
+      );
     }
   }
 

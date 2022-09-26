@@ -9,7 +9,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     CollectionReference _snapshot =
-        FirebaseFirestore.instance.collection('users');
+        FirebaseFirestore.instance.collection('customers');
     return FutureBuilder(
       future: _snapshot.doc(_auth.currentUser!.uid).get(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -213,6 +213,12 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   )
                 ],
+              ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                },
+                child: Icon(Icons.logout),
               ),
             ),
           );

@@ -49,7 +49,7 @@ class AuthController {
           password: password,
         );
         String downloadUrl = await _uploadImageToStorage(image);
-        await _firestore.collection('users').doc(credential.user!.uid).set({
+        await _firestore.collection('customers').doc(credential.user!.uid).set({
           'fullName': fullName,
           'email': email,
           'image': downloadUrl,

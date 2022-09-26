@@ -42,6 +42,13 @@ class CustomerLoginScreenState extends State<CustomerLoginScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -108,7 +115,7 @@ class CustomerLoginScreenState extends State<CustomerLoginScreen> {
                   ),
                   SizedBox(height: 8),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       login();
                     },
                     child: Container(

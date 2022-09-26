@@ -58,9 +58,9 @@ class _MyAppState extends State<MyApp> {
       ),
       themeMode: ThemeMode.system,
       darkTheme: ThemeData.dark(),
-      // home: currentPage,
+      home: currentPage,
       // home: CustomerHomeScreen(),
-      home: LandingCustomerScreen(),
+      // home: LandingCustomerScreen(),
       // initialRoute: LandingCustomerScreen.routeName,
       // routes: {
       //   CustomerHomeScreen.routeName: (context) => CustomerHomeScreen(),
